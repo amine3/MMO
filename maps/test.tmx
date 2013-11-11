@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="suelos" tilewidth="32" tileheight="32">
+  <image source="../../../../gameTest/Graphics/Tilesets/suelos.png" trans="ffffff" width="384" height="480"/>
+ </tileset>
+ <tileset firstgid="181" name="Outside_B2" tilewidth="32" tileheight="32">
+  <image source="../../../../gameTest/Graphics/Tilesets/Outside_B2.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <layer name="main" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3PMQ6CQBRF0Vm1QovWqFCLNbBJ/gZ0hoSQMTnFqd+7bUqpBQAAqMQrDAXGCr7+8g5Tgc8BW5dwzWj+oKMLt4y7Dh06dHwxh6XAWnnHmfrwyHhW8BMAAAAA9tgAXCFT7BAnAAA=
+  </data>
+ </layer>
+ <layer name="colisiones" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3aMQ6AIBAAQV6tD/DF/kDtjIUeKrjgbnIdIUxFc3NKae5kWq83R+sWHax6MGzpYKWDlQ5WOlj9zTFlzBflOCK94RjWGQOzj+g4vjFyRsezc2fpuE5HfqUdtf6Pko6aRf6OFhx30sFKBysdrHSw0sFKBysdrHSw0sFKBysd8bvv3p+zW1V6r6vmLNuAcd0QJwAA
+  </data>
+ </layer>
+ <layer name="over" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAODfAC7KO00QJwAA
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="50" height="50">
+  <object name="heroe" x="872" y="403"/>
+ </objectgroup>
+</map>
