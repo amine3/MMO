@@ -47,7 +47,7 @@ class Mapa:
 		#	self.mobs[i] = Mounstro(self.mobs[i],self.start)
 		#self.crear_mapa()
 
-	# Extrae valores mapa desde XML.	
+		# Extrae valores mapa desde XML.	
 	def cargar_mapa(self):
 		xmlMap = minidom.parse("maps/"+self.nombre)
 		nPrincipal = xmlMap.childNodes[0]
