@@ -19,7 +19,6 @@ class Mapa:
     def __init__(self, nombre, list_personnages, screen):
 
         self.nombre = nombre
-        self.left, self.top = 0, 0
         self.capas = []
         self.mobs = []
         self.transition = []
@@ -31,9 +30,9 @@ class Mapa:
         for i in range(len(self.mobs)):
             list = self.mobs[i]
             id = list[0]
-            self.start = (list[1], list[2])
+            self.start_mobs = (list[1], list[2])
             perso = list_personnages[id]
-            Mob = Personnage_non_joeur(perso[0], perso[1], perso[2], perso[3], self.start)
+            Mob = Personnage_non_joeur(perso[0], perso[1], perso[2], perso[3], self.start_mobs, self.start)
             self.mobs[i] = Mob
             self.MobGroup.add(Mob)
 

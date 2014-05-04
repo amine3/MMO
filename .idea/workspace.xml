@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d72c3ba-f21f-4d11-9dba-80a8196ead9d" name="Default" comment="commit first">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphics/Tilesets/tilea2.png" afterPath="$PROJECT_DIR$/Graphics/Tilesets/tilea2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine.py" afterPath="$PROJECT_DIR$/engine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/funciones.py" afterPath="$PROJECT_DIR$/funciones.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui.py" afterPath="$PROJECT_DIR$/gui.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interfaz.py" afterPath="$PROJECT_DIR$/interfaz.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Thumbs.db" afterPath="$PROJECT_DIR$/Thumbs.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maps/demo1.tmx" afterPath="$PROJECT_DIR$/maps/demo1.tmx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maps.py" afterPath="$PROJECT_DIR$/maps.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.settings/org.eclipse.core.resources.prefs" afterPath="$PROJECT_DIR$/.settings/org.eclipse.core.resources.prefs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sprite.py" afterPath="$PROJECT_DIR$/sprite.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maps/test.tmx" afterPath="$PROJECT_DIR$/maps/test.tmx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MMO.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,13 +30,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="0" selection-start="3292" selection-end="3292" vertical-scroll-proportion="2.9976797" vertical-offset="204" max-vertical-offset="10013">
+            <state line="79" column="104" selection-start="2718" selection-end="2718" vertical-scroll-proportion="-5.1923075" vertical-offset="1208" max-vertical-offset="9996">
               <folding>
                 <element signature="e#143#162#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sprite.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://C:/Python27/Lib/site-packages/pygame/sprite.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1417" column="0" selection-start="52934" selection-end="52934" vertical-scroll-proportion="0.0" vertical-offset="23815" max-vertical-offset="24259">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -63,29 +68,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="demo.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/demo/demo.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="0" selection-start="1175" selection-end="1175" vertical-scroll-proportion="0.0" vertical-offset="328" max-vertical-offset="867">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="demo1.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/demo/demo1.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="0" selection-start="1255" selection-end="1255" vertical-scroll-proportion="0.0" vertical-offset="589" max-vertical-offset="1054">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="sprite.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sprite.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="24" selection-start="1455" selection-end="1455" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="8806">
-              <folding />
+            <state line="409" column="87" selection-start="13594" selection-end="13594" vertical-scroll-proportion="0.0" vertical-offset="5899" max-vertical-offset="8143">
+              <folding>
+                <element signature="e#46#59#0" expanded="true" />
+                <element signature="e#697#1264#0" expanded="false" />
+                <element signature="e#11815#12781#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,10 +90,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="maps.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="maps.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/maps.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="120" column="0" selection-start="6218" selection-end="6218" vertical-scroll-proportion="0.0" vertical-offset="1892" max-vertical-offset="3927">
+            <state line="20" column="28" selection-start="392" selection-end="392" vertical-scroll-proportion="0.5047847" vertical-offset="129" max-vertical-offset="3910">
               <folding>
                 <element signature="e#57#84#0" expanded="true" />
               </folding>
@@ -134,15 +125,16 @@
         <option value="$PROJECT_DIR$/maps/demo.tmx" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/chapitres/trans.xml" />
-        <option value="$PROJECT_DIR$/sprite.py" />
         <option value="$PROJECT_DIR$/chapitres/chapitre1.xml" />
         <option value="$PROJECT_DIR$/chapitres/test.xml" />
         <option value="$PROJECT_DIR$/demo/demo.xml" />
         <option value="$PROJECT_DIR$/action.py" />
         <option value="$PROJECT_DIR$/demo/demo1.xml" />
         <option value="$PROJECT_DIR$/demo.py" />
-        <option value="$PROJECT_DIR$/maps.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/chapitres/demo1.xml" />
+        <option value="$PROJECT_DIR$/sprite.py" />
+        <option value="$PROJECT_DIR$/maps.py" />
       </list>
     </option>
   </component>
@@ -194,6 +186,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="MMO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chapitres" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -458,17 +464,10 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="190" />
+      <option name="time" value="193" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sprite.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="229" column="13" selection-start="7781" selection-end="7781" vertical-scroll-proportion="0.0" vertical-offset="3893" max-vertical-offset="5168">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/maps.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="152" column="66" selection-start="7787" selection-end="7787" vertical-scroll-proportion="0.0" vertical-offset="2584" max-vertical-offset="3281">
@@ -502,7 +501,11 @@
     <entry file="file://$PROJECT_DIR$/sprite.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="23" column="23" selection-start="701" selection-end="701" vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="8840">
-          <folding />
+          <folding>
+            <element signature="e#46#59#0" expanded="true" />
+            <element signature="e#697#1264#0" expanded="false" />
+            <element signature="e#11815#12781#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -551,7 +554,11 @@
     <entry file="file://$PROJECT_DIR$/sprite.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="511" column="26" selection-start="18086" selection-end="18086" vertical-scroll-proportion="0.0" vertical-offset="8687" max-vertical-offset="8857">
-          <folding />
+          <folding>
+            <element signature="e#46#59#0" expanded="true" />
+            <element signature="e#697#1264#0" expanded="false" />
+            <element signature="e#11815#12781#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -595,7 +602,11 @@
     <entry file="file://$PROJECT_DIR$/sprite.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="0" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="8670">
-          <folding />
+          <folding>
+            <element signature="e#46#59#0" expanded="true" />
+            <element signature="e#697#1264#0" expanded="false" />
+            <element signature="e#11815#12781#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -634,7 +645,11 @@
     <entry file="file://$PROJECT_DIR$/sprite.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="0" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="8670">
-          <folding />
+          <folding>
+            <element signature="e#46#59#0" expanded="true" />
+            <element signature="e#697#1264#0" expanded="false" />
+            <element signature="e#11815#12781#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -737,28 +752,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/pygame/sprite.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1416" column="0" selection-start="52896" selection-end="52896" vertical-scroll-proportion="0.5022523" vertical-offset="23815" max-vertical-offset="24259" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/action.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="60" column="82" selection-start="3168" selection-end="3168" vertical-scroll-proportion="0.0" vertical-offset="826" max-vertical-offset="1309">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/demo/demo1.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="0" selection-start="1255" selection-end="1255" vertical-scroll-proportion="0.0" vertical-offset="589" max-vertical-offset="1054">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/demo/demo.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="0" selection-start="1175" selection-end="1175" vertical-scroll-proportion="0.0" vertical-offset="423" max-vertical-offset="867">
           <folding />
         </state>
       </provider>
@@ -777,23 +773,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sprite.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="24" selection-start="1455" selection-end="1455" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="8806">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chapitres/test.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="26" column="32" selection-start="854" selection-end="854" vertical-scroll-proportion="0.3387471" vertical-offset="296" max-vertical-offset="1088">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/demo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="0" selection-start="9178" selection-end="9178" vertical-scroll-proportion="0.0" vertical-offset="2837" max-vertical-offset="3281">
           <folding />
         </state>
       </provider>
@@ -805,20 +787,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/maps.py">
+    <entry file="file://C:/Python27/Lib/site-packages/pygame/sprite.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="0" selection-start="6218" selection-end="6218" vertical-scroll-proportion="0.0" vertical-offset="1892" max-vertical-offset="3927">
-          <folding>
-            <element signature="e#57#84#0" expanded="true" />
-          </folding>
+        <state line="1417" column="0" selection-start="52934" selection-end="52934" vertical-scroll-proportion="0.0" vertical-offset="23815" max-vertical-offset="24259">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="0" selection-start="3292" selection-end="3292" vertical-scroll-proportion="2.9976797" vertical-offset="204" max-vertical-offset="10013">
+        <state line="79" column="104" selection-start="2718" selection-end="2718" vertical-scroll-proportion="-5.1923075" vertical-offset="1208" max-vertical-offset="9996">
           <folding>
             <element signature="e#143#162#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo/demo1.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chapitres/demo1.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="18" selection-start="1028" selection-end="1028" vertical-scroll-proportion="0.71867615" vertical-offset="342" max-vertical-offset="1054">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo/demo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="0" selection-start="1175" selection-end="1175" vertical-scroll-proportion="0.9842342" vertical-offset="328" max-vertical-offset="867">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="195" column="0" selection-start="9178" selection-end="9178" vertical-scroll-proportion="0.0" vertical-offset="2837" max-vertical-offset="3281">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sprite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="409" column="87" selection-start="13594" selection-end="13594" vertical-scroll-proportion="0.0" vertical-offset="5899" max-vertical-offset="8143">
+          <folding>
+            <element signature="e#46#59#0" expanded="true" />
+            <element signature="e#697#1264#0" expanded="false" />
+            <element signature="e#11815#12781#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="28" selection-start="392" selection-end="392" vertical-scroll-proportion="0.5047847" vertical-offset="129" max-vertical-offset="3910">
+          <folding>
+            <element signature="e#57#84#0" expanded="true" />
           </folding>
         </state>
       </provider>

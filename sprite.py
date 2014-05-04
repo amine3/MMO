@@ -387,7 +387,7 @@ class Item:
 
 
 class Personnage_non_joeur(pygame.sprite.Sprite):
-    def __init__(self, id, name, image, list_dialogues, start):
+    def __init__(self, id, name, image, list_dialogues, start, start_perso_principal):
         pygame.sprite.Sprite.__init__( self )
         self.nom = name
         self.id = id
@@ -407,6 +407,7 @@ class Personnage_non_joeur(pygame.sprite.Sprite):
         self.reached_x = False
         self.reached_y = False
         self.dialogues = list_dialogues
+        self.rect.move_ip(-start_perso_principal[0] + WIDTH / 2, -start_perso_principal[1] + HEIGHT / 2)
 
     def get_list_dialogues(self):
         return self.dialogues
