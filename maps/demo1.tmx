@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tilea1" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/tilea1.png" width="512" height="384"/>
+ </tileset>
+ <tileset firstgid="193" name="trees2" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/trees2.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="449" name="suelos" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/suelos.png" trans="ffffff" width="384" height="480"/>
+ </tileset>
+ <tileset firstgid="629" name="pirate-themed-tilee" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/pirate-themed-tilee.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="885" name="chibihikaru-tilea2" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/chibihikaru-tilea2.png" trans="ffffff" width="512" height="384"/>
+ </tileset>
+ <layer name="main" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2WSU7EMBBFHbJmWPWO4SqcA/YgwQE4ANwAbpDcILkFV2DYwYZh04INQyHF4vO72o5bVJRIXjy5bcuV+v5V6cwK526cc7fCnXDv7Ofz4v+ZCU8S+1l4EV6d/dxKx4fE/hS+BDfA3ErHurAhbApbA8ytdGwLO8KusJc4PyidOyzTzlvoeBCrH118nBWLXK85dyIaTsvftVgcCw0/vEnsdxcfNR375eJaLI6Vjr5+hHxBxu5HyJfsR/Yj+5H9yH70h/OohLojlvMqWOmoIPcqAa8ztK/FrI10NPCMJoG209FAjJriaTFbIx1tj3wr+I2gH7jP5xkrHXWEPn5o+S6LZ6VjVfC9gHW1TJelH74mQv0a6/M6MHK/W/nB94iE+t/fq/+N+eKIPTOUDnwe58+97PPhNX7v4rvCsj/wuayloTWufaxLv4b5tsVfvyz7A++ftfBdcg3Ni0VtmG9Le5Y6tFrCnDQwH+2+Ub9WY5Z+8P8F36F2x5oOvAuMzecs66oP3B9cazEPLb+vtPdtn+8r1JGClQ6+z0ZZxznqSPHQuq5S75PrKvU72ULHUYBz4UIZ8TzvheJ5htZxKVwpI57nvTHq4Ls+7pi6H2cdU/cj98c4/PB9ofnBe2PUwX2h+cF7Y9SR+2NcOvr4MaX+CPmR+2NcfkyhP7j2p+oH1/5U/cj9MbyOb5+fgX4QJwAA
+  </data>
+ </layer>
+ <layer name="colisiones" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3PsQ2AMBAEQbfq/psggYyAxPqVmJM2v9lrrS1Jd182/fFPji+W6X8cHBwcHPOd2rTrzTn9gYOjGkcrjlYcrThacbTi6PRs+gcHRzGOVhytOFpxtOJoxdGK40wXrYDR2xAnAAA=
+  </data>
+ </layer>
+ <layer name="over" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAODfAC7KO00QJwAA
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="50" height="50">
+  <object name="heroe" x="466" y="1557" width="21" height="19"/>
+  <object name="fighter" x="455" y="1204" width="22" height="33"/>
+ </objectgroup>
+</map>

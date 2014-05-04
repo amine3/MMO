@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tilea2" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/tilea2.png" width="512" height="384"/>
+ </tileset>
+ <tileset firstgid="193" name="21" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/21.png" width="512" height="512"/>
+ </tileset>
+ <layer name="main" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3WSw4BQRSF4eqhxpBEYT3sgK17LcBrAWiJ0wOJgaQpUc69zuCbVt0/d1AVQwh9ByLBDOrw15HafvfrWVL38Th/bMDc8e65vScsdixgCStYw8ZoxxZ2sIcDHI12nOAMF6jgarSjVYRQQhs60C3sddQGmDvCEEYwNtZRm8D0i+fn6pjB3EFHzrcw5a5X3uvcb/ond7H8SXLvXh3/0+GFl32og4s6uKiDizq4qIOLOriog4s6uKiDi5cOL7zsQx2ifajDCi8dN3wppLoQJwAA
+  </data>
+ </layer>
+ <layer name="colisiones" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3WMQ6AIBAAQX0CLf9/qKGjMBKBw5XsJNdZ3EaJ5GMP+esFJrGDpacjVUPxtqPePzVmpajvareO82Yi2PHMjj6RHWXq3f/YsZodbSv/ISP3ktFnZhp5H5Q7SeH5YLGDxQ4WO1jsYLGDxQ4WO1jsYLGDxQ4WO1jsYLGDxQ4WO1h26bgAImJBVhAnAAA=
+  </data>
+ </layer>
+ <layer name="over" width="50" height="50" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAODfAC7KO00QJwAA
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="50" height="50">
+  <object name="fighter" x="313" y="388"/>
+  <object name="reine" x="218" y="258" width="30" height="23"/>
+  <object name="madrassa" type="transition" x="831" y="350" width="34" height="31"/>
+ </objectgroup>
+</map>

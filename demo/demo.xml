@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<demo version="1.0">
+ <personnages>
+	<personnage id='reine' name='reine' image='Graphics/charasets/bison.png'>
+		<dialogues>
+			<dialogue index='0' type='1'>
+			khouya simo, salam
+			</dialogue>
+			<dialogue index='1' type='1'>
+			fin jat lmdrassa
+			</dialogue>
+            <dialogue index='2' type='1'>
+			yhfdoooo
+			</dialogue>
+            <dialogue index='3' type='1'>
+			l3zzzzz !
+			</dialogue>
+		</dialogues>
+	</personnage>
+	<personnage id='fighter' name='fighter' image='Graphics/charasets/zidane.png'>
+		<dialogues>
+			<dialogue index='0' type='1'>
+			wa alaikom salam
+			</dialogue>
+			<dialogue index='1' type='1'>
+			sir nichaaane rah 9dam soussi moul l7anoute
+			</dialogue>
+		</dialogues>
+	</personnage>
+	</personnages>
+ <scenario>
+	<map name="start.tmx"/>
+	<music path='music/Village2.mid'/>
+    <sequence>
+
+        <move personnage_id="reine" target_x="50" target_y="-90"/>
+        <move personnage_id="reine" target_x="64" target_y="-90"/>
+        <move personnage_id="reine" target_x="-520" target_y="-90"/>
+        <move personnage_id="reine" target_x="-610" target_y="-80"/>
+
+    </sequence>
+ </scenario>
+</demo>
+
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Outside_B" tilewidth="32" tileheight="32">
+  <image source="../../PycharmProjects/MMO/Graphics/Tilesets/Outside_B.png" width="512" height="512"/>
+ </tileset>
+ <layer name="main" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3PMQ0AAAgEsfeNLAwiA0g6dL+rJAUAwKo+0OADAAAAAAAA+G4AjK4bdxAnAAA=
+  </data>
+ </layer>
+ <layer name="colisiones" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3VwQ2AMAwDwO6/D4zQPWAEJgAmQH5hwZ3kXx6NrCpjAHzXGqbVDNO6S9rHfOeZj77Qx3ZlD+aX0dvHEczeezT2kWruI9Hah//R56/3AwAAAAAAgNwJwwNISxAnAAA=
+  </data>
+ </layer>
+ <layer name="over" width="50" height="50">
+
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3TQQoAIAgEwPr/a/tBdA2DbobNgBdBWBFbA076VlGvx6PPiXLfFPmq3KLCDkuVPaoY2QHgYf4DAAAAAACAH02rjV85ECcAAA==
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="50" height="50">
+  <object name="heroe" type="reine" x="267" y="942"/>
+  <object name="reine" type="fighter" x="309" y="943"/>
+ </objectgroup>
+</map>

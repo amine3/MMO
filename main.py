@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------------------------------
 # M�dulos
-import sys, pygame
-import random
-from pygame.locals import *
+from fight import *
 from interfaz import *
 from maps import *
 from funciones import *
-from engine import WIDTH, HEIGHT, velocidad
+from engine import WIDTH, HEIGHT, Max_Number_Conversation
+from chapitre import Chapitre
+from test import Mouvement
 # ------------------------------------------------------------------------------------
 # Constantes
 #WIDTH = 800
@@ -28,8 +28,8 @@ class RPG:
         
         self.I = InterfazJuego(self.screen)
         self.PlayerGroup = pygame.sprite.RenderUpdates(self.I.jugador)
-        
-        self.MapTest = Mapa("test.tmx")
+        self.chapitre = Chapitre("demo1.xml")
+        self.MapTest = Mapa("demo1.tmx", self.chapitre.list_personnages, self.screen)
         self.cursor = Cursor()
         self.DroppedItems = []
         
@@ -39,10 +39,13 @@ class RPG:
         self.char_act = False
         self.equip_act = False
         self.MobBar_act = False
-        
+        self.stop_move = False
+        self.available_discuss = None
+        self.mouvement = Mouvement()
         #Manejo de delay y tiempo
         self.clock = pygame.time.Clock()
         self.time = 0
+        self.fight_time = 0
         self.delayAtk = 0
         
         #Musica
@@ -52,26 +55,43 @@ class RPG:
         self.bucle_principal()
     def bucle_principal(self):
         pygame.mixer.music.load('music/Village2.mid')
-        pygame.mixer.music.play()
+        #pygame.mixer.music.play()
         while True:
             self.screen.fill((0,0,0))
             self.Hotkeys()
             self.clock.tick(60)
             self.time+=1
+            self.fight_time += 1
             self.delayAtk+=1
-            
+            global global_vx, global_vy
             if self.time>40:
                 self.time=0
-                
+
+            if self.fight_time > 500:
+                num = funciones.random_number(0, 1)
+                if num > 0:
+                    list_player = [self.I.jugador]
+
+                    #fight = Fight(self.screen, list_player,False, self.chapitre)
+                    #fight.draw_main()
+                self.fight_time = 0
+
             self.cursor.update()
             hubo_colision = pygame.sprite.spritecollideany(self.I.jugador, self.MapTest.colisionesGroup)
-            
-            self.MapTest.update(self.screen, self.I.jugador, hubo_colision)
-            
+            print self.I.jugador.rect
+            self.trans_colision = pygame.sprite.spritecollideany(self.I.jugador, self.MapTest.TransGroup)
+            if self.trans_colision:
+                self.chapitre = Chapitre(self.trans_colision.name + ".xml")
+                self.MapTest = Mapa(self.trans_colision.name + ".tmx", self.chapitre.list_personnages, self.screen)
+            self.perso_colision = pygame.sprite.spritecollideany(self.I.jugador, self.MapTest.MobGroup)
+            if self.perso_colision:
+                self.available_discuss = self.perso_colision
+            self.MapTest.update(self.screen, self.mouvement, hubo_colision, self.perso_colision, self.stop_move)
             self.I.jugador.SpellRingUpdate(self.screen)
-            self.MapTest.MobsUpdate(self.screen, self.I.jugador, self.time, hubo_colision) 
+            self.MapTest.MobsUpdate(self.screen, self.mouvement, self.time, hubo_colision, self.perso_colision)
+            self.MapTest.TransUpdate(self.screen, self.mouvement, self.time, hubo_colision, self.perso_colision)
             self.ItemDropUpdate(hubo_colision)
-            self.I.jugador.update(self.screen, self.time)
+            self.I.jugador.update(self.screen, self.time, self.mouvement, self.perso_colision)
             self.screen.blit(self.MapTest.OverMap.imagen, self.MapTest.mapa.rect)
             if self.MobBar_act:
                 self.MapTest.MobsHpBarsUpdate(self.screen)
@@ -80,7 +100,7 @@ class RPG:
                 self.I.jugador.Spell.update(self.screen, self.I.jugador, hubo_colision)
             self.I.update(self.bag_act, self.runes_act, self.char_act, self.equip_act, self.cursor)
             self.ItemDescription()
-            
+
             pygame.display.update() #.flip()
         pygame.quit()
 
@@ -125,7 +145,6 @@ class RPG:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
-                    print event.key
                     if event.key == K_ESCAPE:
                         pygame.quit()
                         sys.exit()
@@ -161,7 +180,6 @@ class RPG:
                     
             partida_window.update(self.screen, self.cursor)
             pygame.display.update()
-            
     def ItemDescription(self):
         for i in range(len(self.I.BagWindow.receptors)):
             if self.I.BagWindow.receptors[i].state:
@@ -210,10 +228,8 @@ class RPG:
                 elif event.key == pygame.K_v:
                     self.MobsHPBars()
                 elif event.key == pygame.K_SPACE:
-                    self.Talk()
-                    f = self.RecogerItem()
-                    if f:
-                        self.RecogerItem(1, f-1)
+                    if self.available_discuss and self.check_neighbor(self.I.jugador.rect, self.available_discuss.rect):
+                        self.Talk(self.available_discuss)
                 elif event.key == pygame.K_m:
                     self.OpenMap()
                 elif event.key == pygame.K_F1:
@@ -260,7 +276,8 @@ class RPG:
                     self.Character()
                 elif click_menu == "Equip":
                     self.Equip()
-                    
+            self.I.jugador.set_stop_move(False)
+
     def Atk(self,i):
         pygame.mixer.Sound('sound/Damage.wav').play()
         self.delayAtk = 0
@@ -293,8 +310,53 @@ class RPG:
             self.bag_act = False
         else:
             self.bag_act = True
-    def Talk(self):
-        pass
+
+    def Talk(self, perso_colision):
+        list_dialogues = perso_colision.get_list_dialogues()
+        for key in xrange(Max_Number_Conversation):
+            if key in list_dialogues:
+                parm_dialogue = list_dialogues[key]
+                self.stop_move = True
+                self.I.jugador.set_stop_move(self.stop_move)
+                if parm_dialogue[0] == 'None':
+                    self.draw_dialog_window(parm_dialogue[1].strip(), perso_colision)
+                else:
+                    repitition = int(parm_dialogue[0])
+                    if repitition > 1:
+                        parm_dialogue[0] = repitition - 1
+                        self.draw_dialog_window(parm_dialogue[1].strip(), perso_colision)
+                    else:
+                        parm_dialogue = list_dialogues.pop(key)
+                        self.draw_dialog_window(parm_dialogue[1].strip(), perso_colision)
+                self.stop_move = False
+                break
+
+    def draw_dialog_window(self, text, perso_colision):
+        bag_image_desc_bar = Image('graphics/bar1.png')
+        bag_image_desc_bar.change_size(WIDTH, HEIGHT * 0.09)
+        text_info_name = Text(text=(text), left=bag_image_desc_bar.rect.left + 20, top=bag_image_desc_bar.rect.top + 10)
+        BagWindow_desc = Window(width=bag_image_desc_bar.rect.w, height=bag_image_desc_bar.rect.h, left=0,
+                                top=0.8 * HEIGHT, moveable=False)
+        BagWindow_desc.appendText(text_info_name)
+        BagWindow_desc.appendBGImage(bag_image_desc_bar)
+        BagWindow_desc.update(self.screen, self.cursor)
+        menu_ON = True
+        while menu_ON:
+            self.MapTest.update(self.screen, self.I.jugador, None, self.stop_move)
+            self.screen.blit(self.MapTest.OverMap.imagen, self.MapTest.mapa.rect)
+            self.I.jugador.update(self.screen, self.time, self.mouvement)
+            self.MapTest.MobsUpdate(self.screen, self.I.jugador, self.time, perso_colision, self.stop_move)
+            BagWindow_desc.update(self.screen, self.cursor)
+            self.cursor.update()
+            pygame.display.update()
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        menu_ON = False
+
     def OpenMap(self):
         pass
     def MobsHPBars(self):
@@ -511,5 +573,11 @@ class RPG:
         self.I.jugador.bag[self.I.BagWindow.objects[c].reference] = None
         self.I.BagWindow.objects[c] = Object()
         self.I.BagWindow.receptors[c].state = False
+
+    def check_neighbor(self, player_rect, non_joueur_rect):
+        if non_joueur_rect.left + non_joueur_rect.width + 1 >= player_rect.left and player_rect.left + player_rect.width + 1 >= non_joueur_rect.left:
+            if non_joueur_rect.top + non_joueur_rect.height + 1 >= player_rect.top and player_rect.top + player_rect.height + 1 >= non_joueur_rect.top:
+                return True
+
 
 Game = RPG()
