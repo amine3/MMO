@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <demo version="1.0">
  <personnages>
-	<personnage id='heroe' name='reine' image='Graphics/charasets/bison.png'>
+	<personnage id='reine' name='الملكة' image='Graphics/charasets/zidane.png'>
 		<dialogues>
 			<dialogue index='0' type='1'>
-			bghiti tzawaj bl amira
+			أتريد الزواج بالأميرة
 			</dialogue>
 			<dialogue index='1' type='1'>
-			iwa tba3ni
+			إذا إتبعني
 			</dialogue>
             <dialogue index='2' type='1'>
-			yhfdoooo
+			لقد وصلنا
 			</dialogue>
             <dialogue index='3' type='1'>
-			yakma 3ytiiii! wa jma3 soufle rah ba9i machafti walo :) !!
+			اتعبت ؟ مهمتك لم تبدأ بعد!!
 			</dialogue>
 			<dialogue index='4' type='1'>
-			ylah sir daba lghaba o jib L9ilada li mkhab3a tamma
+	    	 مهتك هي إحضار القلادة الذهبية
 			</dialogue>
 		</dialogues>
 	</personnage>
-	<personnage id='fighter' name='fighter' image='Graphics/charasets/zidane.png'>
+	<personnage id='fighter' name='الفارس' image='Graphics/charasets/char.png'>
 		<dialogues>
 			<dialogue index='0' type='1'>
-			Eiiiiiiiiiiih !
+			نعم ! بالطبع !!
 			</dialogue>
 			<dialogue index='1' type='1'>
-			hana mourak
+			أنا خلفك مباشرة
 			</dialogue>
 			<dialogue index='2' type='1'>
-			la la rani mzyaaan
+			أنا بخير
 			</dialogue>
 			<dialogue index='3' type='1'>
-			ti de suitttttte
+			حالا !!
 			</dialogue>
 		</dialogues>
 	</personnage>
@@ -45,10 +45,17 @@
 		<talk personnage_id="fighter"/>
 		<talk personnage_id="reine"/>
 		<talk personnage_id="fighter"/>
-		<move personnage_id="reine" target_x="64" target_y="-90"/>
-		<move personnage_id="fighter" target_x="64" target_y="-90"/>
+		<move_groupe  target_x="-67" target_y="-400" decalage = "x">
+		    <perso personnage_id="reine"/>
+            <perso personnage_id="fighter"/>
+        </move_groupe>
 		<talk personnage_id="reine"/>
-		<talk personnage_id="reine"/>
+        <talk personnage_id="reine"/>
+		<jump personnage_id="fighter"/>
+        <talk personnage_id="fighter"/>
+        <talk personnage_id="reine"/>
+		<talk personnage_id="fighter"/>
+        <move personnage_id="fighter" target_x="-75" target_y="-200" />
     </sequence>
  </scenario>
 </demo>

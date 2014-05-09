@@ -19,6 +19,7 @@ class Mapa:
     def __init__(self, nombre, list_personnages, screen):
 
         self.nombre = nombre
+        self.start = None
         self.capas = []
         self.mobs = []
         self.transition = []
@@ -31,6 +32,8 @@ class Mapa:
             list = self.mobs[i]
             id = list[0]
             self.start_mobs = (list[1], list[2])
+            if not self.start:
+                self.start = self.start_mobs
             perso = list_personnages[id]
             Mob = Personnage_non_joeur(perso[0], perso[1], perso[2], perso[3], self.start_mobs, self.start)
             self.mobs[i] = Mob
@@ -173,7 +176,7 @@ class Mapa:
             if pygame.sprite.spritecollideany(self.mobs[i], self.colisionesGroup):
                 self.mobs[i].update(screen, mouvement, time, maps_col, player_col, True, stop)
             else:
-                if not demo or (demo and self.mobs[i] != perso_demo):
+                if not demo or (demo and (perso_demo and self.mobs[i] not in  perso_demo)):
                     self.mobs[i].update(screen, mouvement, time, maps_col, player_col, False, stop)
 
     def TransUpdate(self, screen, mouvement, time, maps_col, player_col, stop=False, demo=False, perso_demo=None):

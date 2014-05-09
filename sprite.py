@@ -403,7 +403,7 @@ class Personnage_non_joeur(pygame.sprite.Sprite):
         self.caminar = False
         self.vx = 0
         self.vy = 0
-        self.speed = 2
+        self.speed = 1
         self.reached_x = False
         self.reached_y = False
         self.dialogues = list_dialogues
@@ -412,8 +412,11 @@ class Personnage_non_joeur(pygame.sprite.Sprite):
     def get_list_dialogues(self):
         return self.dialogues
 
+    def get_id(self):
+        return self.id
+
     def get_name(self):
-        return str(self.nom)
+        return (self.nom)
 
     def update(self, screen, mouvement, time, hubo_colision, player_col, col, stop):
         a = random.randint(1,400)
@@ -445,10 +448,11 @@ class Personnage_non_joeur(pygame.sprite.Sprite):
 
         if not hubo_colision and not player_col:
             (self.oldleft, self.oldtop) = (self.rect.left, self.rect.top)
+            global_vx, global_vy = mouvement.get_vitesse()
             if col:
+                self.rect.move_ip(-global_vx , -global_vy )
                 screen.blit(self.image, self.rect)
             else:
-                global_vx, global_vy = mouvement.get_vitesse()
                 self.rect.move_ip(-global_vx + self.vx, -global_vy + self.vy)
                 if self.vx != 0 or self.vy != 0:
                     screen.blit(self.sprite[self.nSprite][time / 10 - 1], self.rect)
@@ -468,17 +472,25 @@ class Personnage_non_joeur(pygame.sprite.Sprite):
             if player_col:
                 screen.blit(self.image, self.rect)
 
-    def update_demo(self, screen, t, mouvement, map, target_x, target_y, perso_colision=False):
-        self.dir = self.mover(t, mouvement, map, target_x, target_y)
+    def update_demo(self, screen, t, mouvement, Map, target_x, target_y, perso_colision=False):
+        direction_to_move = self.get_direction(Map.mapa, target_x,target_y)
+        direction = self.calcul_dist(self.rect, Map.TransGroup, direction_to_move)
+        self.dir = self.move_step(direction, t, mouvement)
         screen.blit(self.dir, self.rect)
 
-    def mover(self, t, mouvement, map, target_x, target_y):
+    def mover(self, t, mouvement, map, group_colision, target_x=None, target_y=None):
         global_vx, global_vy = mouvement.get_vitesse()
+        if target_x ==None:
+            target_x=map.rect.left
+        if target_y ==None:
+            target_y=map.rect.top
+
         if map.rect.left < target_x:
             global_vx = -self.speed
             self.x = 1
             self.image = self.sprite[1][0]
         elif map.rect.left > target_x:
+            self.direction = self.calcul_dist(self.rect, group_colision, "droite")
             global_vx = self.speed
             self.x = 2
             self.image = self.sprite[2][0]
@@ -492,10 +504,8 @@ class Personnage_non_joeur(pygame.sprite.Sprite):
             self.image = self.sprite[0][0]
         if map.rect.left == target_x:
             global_vx = 0
-            self.reached_x = True
         if map.rect.top == target_y:
             global_vy = 0
-            self.reached_y = True
         #if self.vx != 0 and self.vy != 0:
         #    self.vy = 0
         #if not perso_colision:
@@ -511,3 +521,58 @@ class Personnage_non_joeur(pygame.sprite.Sprite):
             return self.image
         else:
             return self.sprite[self.x][t / 10 - 1]
+
+    def move_step(self,direction, time, mouvement):
+        global_vx, global_vy = 0 ,0
+        if direction:
+            if direction == 'gauche':
+                global_vx = -self.speed
+                self.x = 1
+                self.image = self.sprite[1][0]
+            elif direction == 'droite':
+                global_vx = self.speed
+                self.x = 2
+                self.image = self.sprite[2][0]
+            elif direction == "haut":
+                global_vy = -self.speed
+                self.x = 3
+                self.image = self.sprite[3][0]
+            elif direction == "bas":
+                global_vy = self.speed
+                self.x = 0
+                self.image = self.sprite[0][0]
+            mouvement.set_vitesse(global_vx, global_vy)
+            return self.sprite[self.x][time / 10 - 1]
+        return self.image
+
+
+    def get_direction(self, map, target_x,target_y):
+        if map.rect.left < target_x:
+            return "gauche"
+        elif map.rect.left > target_x:
+            return "droite"
+        elif map.rect.top < target_y:
+            return "haut"
+        elif map.rect.top > target_y:
+            return "bas"
+        else:
+            return None
+
+    def calcul_dist(self, player_rect, group_colision, direction):
+        if direction == "droite":
+            for s in group_colision:
+                if player_rect.left + player_rect.width - s.rect.left < 2:
+                    return "bas"
+        if direction == "bas":
+            for s in group_colision:
+                if player_rect.top + player_rect.heigh - s.rect.top < 2:
+                    return "gauche"
+        if direction == "gauche":
+            for s in group_colision:
+                if player_rect.left - s.rect.left - s.rect.width < 2:
+                    return "haut"
+        if direction == "haut":
+            for s in group_colision:
+                if player_rect.top - s.rect.top - s.rect.heigh < 2:
+                    return "droite"
+        return direction

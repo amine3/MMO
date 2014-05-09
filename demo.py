@@ -14,6 +14,7 @@ class Demo:
     def __init__(self, screen, demo):
         self.name = demo
         self.list_personnages = {}
+        self.list_group_move = []
         self.pivot = 1
         self.sequence = {}
         self.creer_map()
@@ -89,6 +90,16 @@ class Demo:
                     nsequence = nscenario.childNodes[i]
                     self.parse_param_sequence(nsequence)
 
+    def parse_param_move_groupe(self, nmove_groupe):
+        # param lie a la scene
+        for i in range(len(nmove_groupe.childNodes)):
+            if nmove_groupe.childNodes[i].nodeType == 1:
+                if nmove_groupe.childNodes[i].nodeName == "perso":
+                    nperso= nmove_groupe.childNodes[i]
+                    perso_id = nperso.attributes.get("personnage_id").value
+                    self.list_group_move.append(perso_id)
+
+
     def parse_param_sequence(self,nsequence):
         pivot = 0
         for i in range(len(nsequence.childNodes)):
@@ -100,6 +111,14 @@ class Demo:
                     self.target_x = nmove.attributes.get("target_x").value
                     self.target_y = nmove.attributes.get("target_y").value
                     self.sequence[pivot]=["move", self.id_perso, self.target_x, self.target_y]
+                if nsequence.childNodes[i].nodeName == "move_groupe":
+                    self.list_group_move
+                    nmove_groupe= nsequence.childNodes[i]
+                    self.target_x = nmove_groupe.attributes.get("target_x").value
+                    self.target_y = nmove_groupe.attributes.get("target_y").value
+                    self.decal = nmove_groupe.attributes.get("decalage").value
+                    self.parse_param_move_groupe(nmove_groupe)
+                    self.sequence[pivot]=["move_groupe", self.list_group_move, self.target_x, self.target_y, self.decal]
                 if nsequence.childNodes[i].nodeName == "talk":
                     ntalk= nsequence.childNodes[i]
                     self.id_perso = ntalk.attributes.get("personnage_id").value
@@ -113,14 +132,22 @@ class Demo:
         if map.rect.left == target_x and map.rect.top == target_y:
             return True
         return False
+
+    def get_id_mob(self,perso, MapTest):
+        i=0
+        perso = self.list_personnages.__getitem__(perso)
+        while MapTest.mobs[i].id != perso[0]:
+            i=i+1
+        return i
+
+
     def run_sequence(self, screen, time,mouvement,MapTest):
         if len(self.sequence) > 0:
             action = self.sequence.get(self.pivot)
-            i=0
-            perso = self.list_personnages.__getitem__(action[1])
-            while MapTest.mobs[i].nom != perso[0]:
-                i=i+1
             if action[0] == "move":
+                list = []
+                i = self.get_id_mob(action[1],MapTest)
+                list.append(MapTest.mobs[i])
                 target_x = int(action[2].strip())
                 target_y = int(action[3].strip())
                 while(not self.check_move(MapTest.mapa,target_x,target_y)):
@@ -129,22 +156,49 @@ class Demo:
                     if time>40:
                         time=0
                     trans_colision = pygame.sprite.spritecollideany(MapTest.mobs[i], MapTest.TransGroup)
-                    print MapTest.mobs[i].rect.left
                     if trans_colision:
                         chapitre = Chapitre(trans_colision.name+".xml")
                         MapTest = Mapa(trans_colision.name+".tmx", chapitre.list_personnages, screen)
                     screen.fill((0,0,0))
                     cursor.update()
                     MapTest.update(screen, mouvement, False, False, False)
-                    MapTest.MobsUpdate(screen, mouvement , time, False, False,stop=True, demo=True,perso_demo=MapTest.mobs[i])
+                    MapTest.MobsUpdate(screen, mouvement , time, False, False, demo=True,perso_demo=list)
                     MapTest.TransUpdate(screen, mouvement, time, False, False)
-                    MapTest.mobs[i].update_demo(screen,time,mouvement,MapTest.mapa,target_x,target_y)
+                    hubo_colision = pygame.sprite.spritecollideany(MapTest.mobs[i], MapTest.colisionesGroup)
+                    MapTest.mobs[i].update_demo(screen,time,mouvement,MapTest,target_x,target_y)
                     screen.blit(MapTest.OverMap.imagen, MapTest.mapa.rect)
                     pygame.display.update()
-
+            elif action[0] == "move_groupe":
+                list = []
+                list_perso = action[1]
+                for perso in list_perso:
+                    i = self.get_id_mob(perso,MapTest)
+                    list.append(MapTest.mobs[i])
+                target_x = int(action[2].strip())
+                target_y = int(action[3].strip())
+                while(not self.check_move(MapTest.mapa,target_x,target_y)):
+                    time+=1
+                    clock.tick(60)
+                    if time>40:
+                        time=0
+                    trans_colision = pygame.sprite.spritecollideany(MapTest.mobs[i], MapTest.TransGroup)
+                    if trans_colision:
+                        chapitre = Chapitre(trans_colision.name+".xml")
+                        MapTest = Mapa(trans_colision.name+".tmx", chapitre.list_personnages, screen)
+                    screen.fill((0,0,0))
+                    cursor.update()
+                    MapTest.update(screen, mouvement, False, False, False)
+                    MapTest.MobsUpdate(screen, mouvement , time, False, False, demo=True,perso_demo=list)
+                    MapTest.TransUpdate(screen, mouvement, time, False, False)
+                    hubo_colision = pygame.sprite.spritecollideany(MapTest.mobs[i], MapTest.colisionesGroup)
+                    self.action.move_groupe(list,screen,time,mouvement,MapTest, int(action[2]), int(action[3]), action[4])
+                    screen.blit(MapTest.OverMap.imagen, MapTest.mapa.rect)
+                    pygame.display.update()
             elif action[0] == "talk":
+                i = self.get_id_mob(action[1],MapTest)
                 self.action.Talk(MapTest.mobs[i],time)
             elif action[0] == "jump":
+                i = self.get_id_mob(action[1],MapTest)
                 self.action.jump(MapTest,screen, mouvement , time,stop=True, demo=True,perso=MapTest.mobs[i])
             self.sequence.pop(self.pivot)
             self.pivot =self.pivot+1
@@ -174,7 +228,7 @@ while True:
     screen.fill((0,0,0))
     cursor.update()
     MapTest.update(screen, mouvement, False, False, False)
-    MapTest.MobsUpdate(screen, mouvement , time, False, False,stop=True, demo=None,perso_demo=None)
+    MapTest.MobsUpdate(screen, mouvement , time, False, False,stop=True, demo=False,perso_demo=None)
     #list_perso.update_demo(screen,time,mouvement,MapTest.mapa,50,-300)
     pygame.display.update()
     screen.blit(MapTest.OverMap.imagen, MapTest.mapa.rect)
@@ -192,4 +246,6 @@ while True:
         pygame.display.update()
     #if MapTest.mapa.rect.top != 2 and MapTest.mapa.rect.left != 2:
         #jugador1.mover_demo(time,MapTest.mapa, 2,2)
-    pygame.display.update()
+    #pygame.display.update()
+    pygame.quit()
+    sys.exit()

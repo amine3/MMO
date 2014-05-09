@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32" backgroundcolor="#05b219">
  <tileset firstgid="1" name="tilea1" tilewidth="32" tileheight="32">
   <image source="../Graphics/Tilesets/tilea1.png" width="512" height="384"/>
  </tileset>
@@ -15,23 +15,26 @@
  <tileset firstgid="885" name="chibihikaru-tilea2" tilewidth="32" tileheight="32">
   <image source="../Graphics/Tilesets/chibihikaru-tilea2.png" trans="ffffff" width="512" height="384"/>
  </tileset>
+ <tileset firstgid="1077" name="21" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/21.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
  <layer name="main" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WSU7EMBBFHbJmWPWO4SqcA/YgwQE4ANwAbpDcILkFV2DYwYZh04INQyHF4vO72o5bVJRIXjy5bcuV+v5V6cwK526cc7fCnXDv7Ofz4v+ZCU8S+1l4EV6d/dxKx4fE/hS+BDfA3ErHurAhbApbA8ytdGwLO8KusJc4PyidOyzTzlvoeBCrH118nBWLXK85dyIaTsvftVgcCw0/vEnsdxcfNR375eJaLI6Vjr5+hHxBxu5HyJfsR/Yj+5H9yH70h/OohLojlvMqWOmoIPcqAa8ztK/FrI10NPCMJoG209FAjJriaTFbIx1tj3wr+I2gH7jP5xkrHXWEPn5o+S6LZ6VjVfC9gHW1TJelH74mQv0a6/M6MHK/W/nB94iE+t/fq/+N+eKIPTOUDnwe58+97PPhNX7v4rvCsj/wuayloTWufaxLv4b5tsVfvyz7A++ftfBdcg3Ni0VtmG9Le5Y6tFrCnDQwH+2+Ub9WY5Z+8P8F36F2x5oOvAuMzecs66oP3B9cazEPLb+vtPdtn+8r1JGClQ6+z0ZZxznqSPHQuq5S75PrKvU72ULHUYBz4UIZ8TzvheJ5htZxKVwpI57nvTHq4Ls+7pi6H2cdU/cj98c4/PB9ofnBe2PUwX2h+cF7Y9SR+2NcOvr4MaX+CPmR+2NcfkyhP7j2p+oH1/5U/cj9MbyOb5+fgX4QJwAA
+   H4sIAAAAAAAAC+3SOU7DUBCA4Qlxy1KlYzkNQhyAvaFhOwABDsB2ALbzADXQuCGBDhqWjjQs/yuQXoxjSMTD89AUn6xR7Of5k9QqIg0RaeIGtxJ+Tiu/r4YHzn7EE54l/Byq45Wz3/AO+YM5VIe7DmAQQ+j35tSb/eey96fenGZm//MQDX6HM4oxDGMkc1+neb4qslBtfz7vvFD757nnZ7/75v9by1w7fSfunJ+cF0KLd750+d68Hsed0yqhwRhjPo0nIhOeyaT8nXoxlXxV9k69dkxjBrOYi7Rjib2XsYJVrEXasc7edWxgE1uRdmyz9w52sYf9SDsO2PsQRzjGSaQdzmJfu7L3sQ7r0MQ6dLEOXaxDF+vQxTp0sQ5drEMXzR2nOCtwHknHBS4LXFmHdViHdShhHeXv/h87rtEo0IykoxsaOz4ANEyBSRAnAAA=
   </data>
  </layer>
- <layer name="over" width="50" height="50" visible="0">
+ <layer name="over" width="50" height="50">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAODfAC7KO00QJwAA
   </data>
  </layer>
  <objectgroup name="Calque d'objets 1" width="50" height="50">
-  <object name="heroe" x="496" y="349" width="21" height="19"/>
-  <object name="fighter" x="455" y="1204" width="22" height="33"/>
+  <object name="reine" x="448" y="1483" width="21" height="19"/>
+  <object name="fighter" x="436" y="1539" width="22" height="33"/>
  </objectgroup>
- <layer name="colisiones" width="50" height="50">
+ <layer name="colisiones" width="50" height="50" visible="0">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3PsQkAIAxFwey/laVbpXIBiRjlDlIG/osAAAAAAADgZeP2gCI6+vmlRcd5c+Mq/3Xo0KFDhw4dOpYEOr+/FhAnAAA=
+   H4sIAAAAAAAAC+3PsQkAMAwEMZN9s3/rEdIY8gYJboCrAgAAAAAAAOCne95t4COLjyw+svjI4oNJDbAo+dEQJwAA
   </data>
  </layer>
 </map>

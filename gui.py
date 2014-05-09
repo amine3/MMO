@@ -1,6 +1,7 @@
 from funciones import *
 from engine import Bag_Left, Bag_Height
-
+import arabic_reshaper
+from bidi.algorithm import get_display, get_empty_storage, get_embedding_levels
 
 class Cursor(pygame.Rect):
     def __init__(self):
@@ -101,8 +102,11 @@ class CheckButton(pygame.sprite.Sprite):
 
 
 class Text(pygame.sprite.Sprite):
-    def __init__(self, text, size=12, color=(255, 255, 255), left=0, top=0, font=None):
-        self.text = fuente(font=font, t=size).render(text, True, color)
+    def __init__(self, text, size=12, color=(255, 255, 255), left=150, top=150, font=None):
+        font = pygame.font.Font("KacstOne.ttf", 36)
+        reshaped_text = arabic_reshaper.reshape(text)
+        bidi_text = get_display(reshaped_text)
+        self.text = font.render(bidi_text, True, color)
         self.rect = self.text.get_rect()
         (self.rect.left, self.rect.top) = (left, top)
 
@@ -111,6 +115,16 @@ class Text(pygame.sprite.Sprite):
 
     def update(self, screen):
         screen.blit(self.text, self.rect)
+
+    def arabic_transformer(text):
+        font = pygame.font.Font("KacstOne.ttf", 36)
+        reshaped_text = arabic_reshaper.reshape(text)
+        bidi_text = get_display(reshaped_text)
+        score_txt = font.render(bidi_text,1,(255,255,255))
+        rect = score_txt.get_rect()
+        (rect.left, rect.top) = (50, 50)
+        arabic_result=(score_txt,rect)
+        return arabic_result
 
 
 class Menu(pygame.sprite.Sprite):
@@ -225,6 +239,7 @@ class Window:
     def appendText(self, text):
         text.rect.left += self.rect.left
         text.rect.top += self.rect.top
+
         self.texts.append(text)
 
     def appendObject(self, obj):

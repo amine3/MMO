@@ -14,3 +14,5 @@ class Mouvement:
 
     def get_vitesse(self):
         return (self.global_vx,self.global_vy)
+
+
