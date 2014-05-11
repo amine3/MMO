@@ -394,6 +394,7 @@ class Personnage_non_joeur(pygame.sprite.Sprite):
         self.status = "Normal"
         self.sprite = cortar_chara(image, 4, 4)
         self.nSprite = 0
+        self.image_path = image
         self.image = self.sprite[0][0]
         self.rect = self.image.get_rect()
         self.rect.left = start[0]
@@ -401,6 +402,7 @@ class Personnage_non_joeur(pygame.sprite.Sprite):
         self.oldleft = 0
         self.oldtop = 0
         self.caminar = False
+        self.fight = "Graphics/charasets/chara2.png"
         self.vx = 0
         self.vy = 0
         self.speed = 1
@@ -418,7 +420,18 @@ class Personnage_non_joeur(pygame.sprite.Sprite):
     def get_name(self):
         return (self.nom)
 
-    def update(self, screen, mouvement, time, hubo_colision, player_col, col, stop):
+    def set_param_fight(self):
+        self.str_b = 0
+        self.int_b = 0
+        self.agi_b = 0
+        self.dex_b = 0
+        self.vit_b = 0
+        self.atack_b = 0
+        self.defense_b = 0
+        self.dodge_b = 0
+        self.crit_b = 0
+
+    def update(self, screen, mouvement, time, hubo_colision, player_col, col, stop, talk_direction=None):
         a = random.randint(1,400)
         if a <= 9:
             self.caminar = False
@@ -445,7 +458,8 @@ class Personnage_non_joeur(pygame.sprite.Sprite):
             else:
                 self.nSprite = 0
                 self.image = self.sprite[0][0]
-
+        if talk_direction:
+            self.image = self.sprite[talk_direction][0]
         if not hubo_colision and not player_col:
             (self.oldleft, self.oldtop) = (self.rect.left, self.rect.top)
             global_vx, global_vy = mouvement.get_vitesse()
@@ -576,3 +590,131 @@ class Personnage_non_joeur(pygame.sprite.Sprite):
                 if player_rect.top - s.rect.top - s.rect.heigh < 2:
                     return "droite"
         return direction
+
+class Mounstro( pygame.sprite.Sprite):
+    def __init__(self, monster_param):
+        pygame.sprite.Sprite.__init__( self )
+        #M = self.traductor(expresion)
+        self.nom = monster_param[0]
+        #self.tipo = M[1]
+        self.status = "Normal"
+        self.maxhp = int(monster_param[2])
+        self.hp = self.maxhp
+        self.maxsp = int(monster_param[3])
+        self.sp = self.maxsp
+        self.exp = int(100)
+        self.atack = int(monster_param[4])
+        self.defense_b = 0
+        self.atack_b = 0
+        self.defense = int(monster_param[5])
+        self.fight = monster_param[1]
+        self.list_Attack = monster_param[6]
+        #self.drops = M[8]
+        #self.movimiento = int(M[9])
+        #self.HAB1 = M[10]
+        #self.HAB2 = M[11]
+        #self.HAB3 = M[12]
+        #self.HAB4 = M[13]
+        #self.sprite = cortar_chara("graphics/mobs/"+M[15][:-1], 4, 4)
+        #self.image = self.sprite[0][0]
+        #self.rect = self.image.get_rect()
+        #self.rect.left = x-xj+WIDTH/2
+        #self.rect.top = y-yj+HEIGHT/2
+
+        #self.maxhprect = pygame.Rect((0, 0), (30, 5))
+        #self.hprect = pygame.Rect((0, 0), (28, 3))
+        #self.maxhprect.centerx = self.rect.centerx
+        #self.maxhprect.top = self.rect.bottom+3
+        #self.hprect.left = self.maxhprect.left+1
+        #self.hprect.top = self.maxhprect.top+1
+
+        #self.caminar = False
+        #self.vx = 0
+        #self.vy = 0
+    def traductor(self,exp):
+        exp = exp.split("_")
+        mobDB = open("MobDataBase.txt")
+        for line in mobDB:
+            if line[0]!="#":
+                Variables = line.split(",")
+                if Variables[1]==exp[0] and Variables[2]==exp[1]:
+                        return Variables
+
+    def get_def_fight(self):
+        return int(self.defense_b)
+    def get_att_fight(self):
+        return self.atack_b
+
+    def update(self, screen, j, time, hubo_colision, col):
+        a = random.randint(1,400)
+        if a <=9 :
+            self.caminar = False
+            self.vx, self.vy = 0, 0
+        elif a == 400:
+            self.caminar = True
+            orientacion = random.choice(["x","y"])
+            direccion = random.choice([-2,2])
+            if orientacion == "x":
+                self.vy = 0
+                self.vx = direccion
+            elif orientacion == "y":
+                self.vx = 0
+                self.vy = direccion
+            if self.vx == -2:
+                self.nSprite = 1
+                self.image = self.sprite[1][0]
+            elif self.vx:
+                self.nSprite = 2
+                self.image = self.sprite[2][0]
+            elif self.vy == -2:
+                self.nSprite = 3
+                self.image = self.sprite[3][0]
+            else:
+                self.nSprite = 0
+                self.image = self.sprite[0][0]
+        if not col:
+            self.oldleft = self.rect.left
+            self.oldtop = self.rect.top
+        else:
+            self.oldleft -= j.vx
+            self.oldtop -= j.vy
+            self.rect.left = self.oldleft
+            self.rect.top = self.oldtop
+            self.vx = 0
+            self.vy = 0
+        self.maxhprect.centerx = self.rect.centerx
+        self.maxhprect.top = self.rect.bottom+3
+        if self.caminar:
+            if hubo_colision:
+                self.rect.move_ip(self.vx, self.vy)
+                self.maxhprect.move_ip(self.vx, self.vy)
+                self.hprect.centery = self.maxhprect.centery
+                self.hprect.left = self.maxhprect.left+1
+                screen.blit(self.sprite[self.nSprite][time/10-1], self.rect)
+            else:
+                self.rect.move_ip(-j.vx + self.vx, -j.vy + self.vy)
+                self.maxhprect.move_ip(-j.vx +self.vx, -j.vy + self.vy)
+                self.hprect.centery = self.maxhprect.centery
+                self.hprect.left = self.maxhprect.left+1
+                screen.blit(self.sprite[self.nSprite][time/10-1], self.rect)
+        else:
+            if hubo_colision:
+                #self.rect.move_ip(-j.vx,-j.vy)
+                screen.blit(self.image,self.rect)
+            else:
+                self.rect.move_ip(-j.vx,-j.vy)
+                self.maxhprect.move_ip(-j.vx,-j.vy)
+                self.hprect.centery = self.maxhprect.centery
+                self.hprect.left = self.maxhprect.left+1
+                screen.blit(self.image,self.rect)
+    def HpBarsUpdate(self, screen):
+        pygame.draw.rect(screen, (111,0,0), self.maxhprect)
+        pygame.draw.rect(screen, (215,94,56), self.hprect)
+    def get_hp(self):
+        return self.hp
+    def get_list_attack(self):
+        return self.list_Attack
+    def subir_attack(self, valeur_perte):
+        self.hp = self.hp - valeur_perte
+        if self.hp < 0:
+            self.hp = 0

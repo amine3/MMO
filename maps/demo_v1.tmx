@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="suelos" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/suelos.png" width="384" height="480"/>
+ </tileset>
+ <tileset firstgid="181" name="trees" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/trees.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="437" name="Outside_B" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/Outside_B.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="693" name="vx-xp-177-chest04" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/vx-xp-177-chest04.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="711" name="38189015" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/38189015.png" width="512" height="512"/>
+ </tileset>
+ <layer name="main" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3DAQkAAAwEoeuf44Mux0DBVVNVVVVVVVVVVdXnDwZzjWYQJwAA
+  </data>
+ </layer>
+ <layer name="over" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAODfAC7KO00QJwAA
+  </data>
+ </layer>
+ <layer name="transparency" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2VO07EMBCG7TSbhkcDVEj0SFCt4ABAs1yJ22wLN9g9wlJRUPBoKCh4XIDHjELE7BDbY8uOHbS/9MuRV9r4yxc7SpWffd106FlxlJX/ynGhl9tXZqy+oRy4bv5/fbDwe4awtBxdDKHPxjcrjt+UwKEi3LOE/REjpZxXPrmEdV2xtbUcQ/qGmN691CznVdMYse2jVAzt+k31jescGgoHxsUwFA5Mn+8UJhVHV1Jx1Lq7KRgwKTlGP63JmCp9cIwMHGNtH6VJucclHKfaPkqTco/zfWHzcQy9rZqRzkvTJ0dt8YHrfyYcJfmYVO5SH7MIPlKwSDioj7YYXx+YnBxjA4evD0wqJ337wOTiiOkD08UxZaNvYvjYgXFXWMoxVd298aw0Lh8tx1w1xesFjNdqeX6uZBxPnsVsa3vpczf5OGAcd9B76AP0UflzhPiQcLh8cI4X6Cv0DfrOOOh5VZqPQ8bxAf2EfuGP+i+Daf2l+ViD63XoBnQzgCP3/pC0PW/52mly+fA5d/n3vIsjlw/fuL7nuXycaVmlHLl8xObI5eNIy0oZSvQRm2NoPkwspfvgDCaOXD4mWlYpRy4foRymhPjY0vam8mFLiA8Jh8vHnpZVypHLh5QDU4KPE1I6H5vjG1PmXzcQJwAA
+  </data>
+ </layer>
+ <layer name="colisiones" width="50" height="50" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3PwQnAMAwEQfffl/tKB4lfYS1mQCDut2sBAAAAU+2Xu8mkjq//BhM7TvYqHS06WnS06GjR0aKjRUeLjhYdLTpadLToaPm74wE88/lKECcAAA==
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="50" height="50">
+  <object name="reine" x="779" y="1515" width="24" height="25"/>
+  <object name="fighter" x="822" y="1516" width="28" height="19"/>
+ </objectgroup>
+</map>

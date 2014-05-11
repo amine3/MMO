@@ -9,6 +9,7 @@ from funciones import *
 from engine import WIDTH, HEIGHT, Max_Number_Conversation
 from chapitre import Chapitre
 from test import Mouvement
+from action import Action
 # ------------------------------------------------------------------------------------
 # Constantes
 #WIDTH = 800
@@ -28,9 +29,11 @@ class RPG:
 
         self.I = InterfazJuego(self.screen)
         self.PlayerGroup = pygame.sprite.RenderUpdates(self.I.jugador)
-        self.chapitre = Chapitre("demo1.xml")
-        self.MapTest = Mapa("demo1.tmx", self.chapitre.list_personnages, self.screen)
+        self.chapitre = Chapitre("test.xml")
+        self.MapTest = Mapa("over.tmx", self.chapitre.list_personnages, self.screen)
         self.cursor = Cursor()
+        self.mouvement = Mouvement()
+        self.action = Action(self.screen, self.cursor, self.mouvement, self.MapTest)
         self.DroppedItems = []
 
         #Ventanas activas
@@ -41,7 +44,6 @@ class RPG:
         self.MobBar_act = False
         self.stop_move = False
         self.available_discuss = None
-        self.mouvement = Mouvement()
         #Manejo de delay y tiempo
         self.clock = pygame.time.Clock()
         self.time = 0
@@ -73,8 +75,8 @@ class RPG:
                 if num > 0:
                     list_player = [self.I.jugador]
 
-                    #fight = Fight(self.screen, list_player,False, self.chapitre)
-                    #fight.draw_main()
+                    fight = Fight(self.screen, list_player,False, self.chapitre)
+                    fight.draw_main()
                 self.fight_time = 0
 
             self.cursor.update()
@@ -230,7 +232,7 @@ class RPG:
                     self.MobsHPBars()
                 elif event.key == pygame.K_SPACE:
                     if self.available_discuss and self.check_neighbor(self.I.jugador.rect, self.available_discuss.rect):
-                        self.Talk(self.available_discuss)
+                        self.action.Talk(self.available_discuss,self.time)
                 elif event.key == pygame.K_m:
                     self.OpenMap()
                 elif event.key == pygame.K_F1:
@@ -342,7 +344,7 @@ class RPG:
     def draw_dialog_window(self, text, perso_colision):
         bag_image_desc_bar = Image('graphics/bar1.png')
         bag_image_desc_bar.change_size(WIDTH, HEIGHT * 0.09)
-        text_info_name = Text(text=(text), left=bag_image_desc_bar.rect.left + 20, top=bag_image_desc_bar.rect.top + 10)
+        text_info_name = Text(text=(text), left=bag_image_desc_bar.rect.left, top=bag_image_desc_bar.rect.top,rect_container = bag_image_desc_bar.rect)
         BagWindow_desc = Window(width=bag_image_desc_bar.rect.w, height=bag_image_desc_bar.rect.h, left=0,
                                 top=0.8 * HEIGHT, moveable=False)
         BagWindow_desc.appendText(text_info_name)

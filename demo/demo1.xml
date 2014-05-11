@@ -38,24 +38,34 @@
 	</personnage>
 	</personnages>
  <scenario>
-	<map name="demo1.tmx"/>
+	<map name="demo_v1.tmx"/>
 	<music path='music/Village2.mid'/>
     <sequence>
-        <talk personnage_id="reine"/>
-		<talk personnage_id="fighter"/>
-		<talk personnage_id="reine"/>
-		<talk personnage_id="fighter"/>
-		<move_groupe  target_x="-67" target_y="-400" decalage = "x">
+         <fight personnage_id="fighter" place='Graphics/Tilesets/a015.jpg'>
+            <ennemies>
+            <ennemi name="sra9 soukar" image="Graphics/battle/enemies/Grand_Golem.gif" maxhp="100" maxsp="100" attack="100" defense="100">
+			<attacks>
+				<attack name="darbat lmanjal" value="100" />
+			</attacks>
+		    </ennemi>
+            </ennemies>
+        </fight>
+        <talk personnage_id="reine" position="2"/>
+		<talk personnage_id="fighter" position ="1"/>
+		<talk personnage_id="reine" position="2"/>
+		<talk personnage_id="fighter" position ="1"/>
+		<move_groupe  target_x="-376" target_y="-600" decalage = "x">
 		    <perso personnage_id="reine"/>
             <perso personnage_id="fighter"/>
         </move_groupe>
-		<talk personnage_id="reine"/>
-        <talk personnage_id="reine"/>
+		<talk personnage_id="reine" position="2"/>
+        <talk personnage_id="reine" position="2"/>
 		<jump personnage_id="fighter"/>
-        <talk personnage_id="fighter"/>
-        <talk personnage_id="reine"/>
-		<talk personnage_id="fighter"/>
-        <move personnage_id="fighter" target_x="-75" target_y="-200" />
+        <talk personnage_id="fighter" position ="1"/>
+        <talk personnage_id="reine" position="2"/>
+		<talk personnage_id="fighter" position="1"/>
+        <move personnage_id="fighter" target_x="-370" target_y="-490" />
+
     </sequence>
  </scenario>
 </demo>

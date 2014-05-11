@@ -28,10 +28,10 @@ C'est quoi Objectif en anglais ?
 			</dialogue>
 		</dialogues>
 	</personnage>
-     	<personnage id='tourist' name='personnage1' image='Graphics/charasets/chara2.png'>
+     	<personnage id='tourist' name='الظريف' image='Graphics/charasets/chara2.png'>
 		<dialogues>
 			<dialogue index='0' type='2'>
-Ya Zina o Gouli je t'AIMEUUUh
+السلام
 			</dialogue>
 			<dialogue index='1' type='None'>
 C'est quoi Objectif en anglais ?

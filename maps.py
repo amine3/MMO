@@ -85,6 +85,14 @@ class Mapa:
                         #print layer
                         layer = convertir(layer, self.width)  # Convierta en array bidimensional
                         self.capaColisiones = layer
+                    elif nPrincipal.childNodes[i].attributes.get("name").value == "transparency":
+                        layer = nPrincipal.childNodes[i].childNodes[1].childNodes[0].data.replace("\n", "").replace(" ",
+                                                                                                                    "")
+                        layer = decodificar(layer)  # Decodifica la lista
+                        #print layer
+                        layer = convertir(layer, self.width)  # Convierta en array bidimensional
+                        self.capaTransparency = layer
+
                     else:
                         layer = nPrincipal.childNodes[i].childNodes[1].childNodes[0].data.replace("\n", "").replace(" ",
                                                                                                                     "")
@@ -118,13 +126,17 @@ class Mapa:
         if hubo_colision or perso_colision:
             self.mapa.rect.left = self.left
             self.mapa.rect.top = self.top
+            self.TransparencyMap.rect.left = self.left
+            self.TransparencyMap.rect.top = self.top
             self.mapa.update(screen, 0, 0, hubo_colision, perso_colision, stop_move)
+            self.TransparencyMap.update(screen, 0, 0, hubo_colision, perso_colision, stop_move)
             for i in range(len(self.colisiones)):
                 (self.colisiones[i].rect.left, self.colisiones[i].rect.top) = self.recs[i]
         else:
             vx, vy = mouvement.get_vitesse()
             (self.left, self.top) = (self.mapa.rect.left, self.mapa.rect.top)
             self.mapa.update(screen, vx, vy, hubo_colision, perso_colision, stop_move)
+            self.TransparencyMap.update(screen, vx, vy, hubo_colision, perso_colision, stop_move)
             self.recs = range(len(self.colisiones))
             for i in range(len(self.colisiones)):
                 self.recs[i] = (self.colisiones[i].rect.left, self.colisiones[i].rect.top)
@@ -138,6 +150,8 @@ class Mapa:
         self.mapa = pygame.Surface((self.width * self.tilewidth, self.height * self.tileheight))
         self.OverMap = pygame.Surface((self.width * self.tilewidth, self.height * self.tileheight), pygame.SRCALPHA, 32)
         self.OverMap = self.OverMap.convert_alpha()
+        self.TransparencyMap = pygame.Surface((self.width * self.tilewidth, self.height * self.tileheight), pygame.SRCALPHA, 32)
+        self.TransparencyMap = self.TransparencyMap.convert_alpha()
         for i in xrange(len(self.capas)):
             for f in xrange(self.height):
                 for c in xrange(self.width):
@@ -145,6 +159,9 @@ class Mapa:
                     if element:
                         self.mapa.blit(self.tileset[element], (c * self.tilewidth, f * self.tileheight))
                         if i == 0:
+                            if self.capaTransparency[f][c]:
+                                self.TransparencyMap.blit(self.tileset[self.capaTransparency[f][c]],
+                                                  (c * self.tilewidth, f * self.tileheight))
                             if self.capaColisiones[f][c]:
                                 rect = pygame.Rect(c * self.tilewidth, f * self.tileheight, self.tilewidth,
                                                    self.tileheight)
@@ -155,19 +172,21 @@ class Mapa:
                             if self.capaOver[f][c]:
                                 self.OverMap.blit(self.tileset[self.capaOver[f][c]],
                                                   (c * self.tilewidth, f * self.tileheight))
-
-
                     else:
                         pass
         rectmap = self.mapa.get_rect()
         rectovermap = self.OverMap.get_rect()
+        recttransparencymap = self.TransparencyMap.get_rect()
         self.mapa = SpriteMap(self.mapa, rectmap)
         self.OverMap = SpriteMap(self.OverMap, rectovermap)
+        self.TransparencyMap = SpriteMap(self.TransparencyMap, recttransparencymap)
         self.capas = []
         self.capaColisiones = []
+        self.capaTransparency = []
         self.capaOver = []
         self.mapa.rect.move_ip(-self.start[0] + WIDTH / 2, -self.start[1] + HEIGHT / 2)
         self.OverMap.rect.move_ip(-self.start[0] + WIDTH / 2, -self.start[1] + HEIGHT / 2)
+        self.TransparencyMap.rect.move_ip(-self.start[0] + WIDTH / 2, -self.start[1] + HEIGHT / 2)
         #for i in range(len(self.colisiones)):
         #	self.colisiones[i].move_ip(-self.start[0]+WIDTH/2, -self.start[1]+HEIGHT/2)
 

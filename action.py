@@ -51,42 +51,43 @@ class Action:
         arabic_result=(score_txt,rect)
         return arabic_result
 
-    def Talk(self, perso_colision, time):
+    def Talk(self, perso_colision, time, direction):
         list_dialogues=perso_colision.get_list_dialogues()
         for key in xrange(Max_Number_Conversation):
             if key in list_dialogues:
                 parm_dialogue = list_dialogues[key]
                 self.stop_move = True
                 mytext = parm_dialogue[1].strip()
-                #print mytext
-                #reshaped_text = arabic_reshaper.reshape(mytext)
-                #bidi_text = get_display(reshaped_text)
-                #"print reshaped_text
                 if parm_dialogue[0] == 'None':
-                    self.draw_dialog_window(perso_colision.get_name() + ": "+ mytext, perso_colision,time)
+                    self.draw_dialog_window(perso_colision.get_name() + ": "+ mytext, perso_colision,time ,direction)
                 else:
                     repitition = int(parm_dialogue[0])
                     if repitition > 1:
                         parm_dialogue[0] = repitition -1
-                        self.draw_dialog_window( ": "+mytext , perso_colision,time)
+                        self.draw_dialog_window( perso_colision.get_name()+": "+mytext , perso_colision,time ,direction)
                     else:
                         parm_dialogue = list_dialogues.pop(key)
-                        self.draw_dialog_window(perso_colision.get_name()+ ": "+mytext , perso_colision,time)
+                        self.draw_dialog_window(perso_colision.get_name()+ ": "+mytext , perso_colision,time ,direction)
                 self.stop_move = False
                 break
-    def draw_dialog_window(self, text, perso_colision, time):
+    def draw_dialog_window(self, text, perso_colision, time ,direction):
         bag_image_desc_bar = Image('graphics/bar1.png')
         bag_image_desc_bar.change_size(WIDTH, HEIGHT*0.09)
-        text_info_name = Text(text=(text), left=bag_image_desc_bar.rect.left+220, top = bag_image_desc_bar.rect.top+10)
+        left = bag_image_desc_bar.rect.left
+        top = bag_image_desc_bar.rect.top
+        text_info_name = Text(text=(text), left=left, top = top , rect_container = bag_image_desc_bar.rect)
         BagWindow_desc = Window(width=bag_image_desc_bar.rect.w, height=bag_image_desc_bar.rect.h, left=0, top=0.8*HEIGHT, moveable=False)
         BagWindow_desc.appendText(text_info_name)
         BagWindow_desc.appendBGImage(bag_image_desc_bar)
         BagWindow_desc.update(self.screen, self.cursor)
         menu_ON = True
         while menu_ON:
+            list=[]
+            list.append(perso_colision)
             self.MapTest.update(self.screen, self.mouvement, None, True)
             self.screen.blit(self.MapTest.OverMap.imagen, self.MapTest.mapa.rect)
-            self.MapTest.MobsUpdate(self.screen, self.mouvement, time, True, True,stop=True, demo=False,perso_demo=None)
+            self.MapTest.MobsUpdate(self.screen, self.mouvement, time, True, True,stop=True, demo=True,perso_demo=list)
+            perso_colision.update(self.screen, self.mouvement, time, True, True, True, True, direction)
             BagWindow_desc.update(self.screen, self.cursor)
             self.cursor.update()
             pygame.display.update()

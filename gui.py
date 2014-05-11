@@ -102,14 +102,16 @@ class CheckButton(pygame.sprite.Sprite):
 
 
 class Text(pygame.sprite.Sprite):
-    def __init__(self, text, size=12, color=(255, 255, 255), left=150, top=150, font=None):
+    def __init__(self, text, size=12, color=(255, 255, 255), left=150, top=150,font=None,rect_container=None):
         font = pygame.font.Font("KacstOne.ttf", 36)
         reshaped_text = arabic_reshaper.reshape(text)
         bidi_text = get_display(reshaped_text)
         self.text = font.render(bidi_text, True, color)
         self.rect = self.text.get_rect()
-        (self.rect.left, self.rect.top) = (left, top)
-
+        if rect_container:
+            (self.rect.left, self.rect.top) = (left+rect_container.width-self.rect.width-50, top)
+        else:
+            (self.rect.left, self.rect.top) = (left, top)
     def Move(self, move):
         self.rect.move_ip(move)
 

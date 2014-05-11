@@ -8,6 +8,7 @@ from test import Mouvement
 from engine import WIDTH, HEIGHT, velocidad, Max_Number_Conversation
 from action import Action
 from chapitre import Chapitre
+from fight import Fight
 
 class Demo:
 
@@ -15,6 +16,7 @@ class Demo:
         self.name = demo
         self.list_personnages = {}
         self.list_group_move = []
+        self.list_ennemies = {}
         self.pivot = 1
         self.sequence = {}
         self.creer_map()
@@ -99,6 +101,41 @@ class Demo:
                     perso_id = nperso.attributes.get("personnage_id").value
                     self.list_group_move.append(perso_id)
 
+    def parse_list_ennemies(self, node_ennemies):
+        for i in range(len(node_ennemies.childNodes)):
+            if node_ennemies.childNodes[i].nodeType == 1:
+                if node_ennemies.childNodes[i].nodeName == "ennemi":
+                    node_ennemie = node_ennemies.childNodes[i]
+                    ennemi_name = node_ennemie.attributes.get("name").value
+                    ennemi_image = node_ennemie.attributes.get("image").value
+                    ennemi_maxhp = node_ennemie.attributes.get("maxhp").value
+                    ennemi_maxsp = node_ennemie.attributes.get("maxsp").value
+                    ennemi_attack = node_ennemie.attributes.get("attack").value
+                    ennemi_defense = node_ennemie.attributes.get("defense").value
+
+                    for i in range(len(node_ennemie.childNodes)):
+                        if node_ennemie.childNodes[i].nodeType == 1:
+                            if node_ennemie.childNodes[i].nodeName == "attacks":
+                                node_attacks = node_ennemie.childNodes[i]
+                                list_attacks=self.parse_list_attacks(node_attacks)
+                                ennemi = [ennemi_name, ennemi_image, ennemi_maxhp, ennemi_maxsp, ennemi_attack, ennemi_defense, list_attacks]
+                if self.list_ennemies:
+                    index = len(self.list_ennemies)
+                else:
+                    index = 0
+                self.list_ennemies[index] = ennemi
+
+    def parse_list_attacks(self, node_attacks):
+        list_attack={}
+        for i in range(len(node_attacks.childNodes)):
+            if node_attacks.childNodes[i].nodeType == 1:
+                if node_attacks.childNodes[i].nodeName == "attack":
+                    attack_name = node_attacks.childNodes[i].attributes.get("name").value
+                    attack_value = node_attacks.childNodes[i].attributes.get("value").value
+                    attack=[attack_name, attack_value]
+                    index = len(list_attack)
+                    list_attack[index] = attack
+        return list_attack
 
     def parse_param_sequence(self,nsequence):
         pivot = 0
@@ -122,11 +159,22 @@ class Demo:
                 if nsequence.childNodes[i].nodeName == "talk":
                     ntalk= nsequence.childNodes[i]
                     self.id_perso = ntalk.attributes.get("personnage_id").value
-                    self.sequence[pivot]=["talk", self.id_perso]
+                    id_position = ntalk.attributes.get("position").value
+                    self.sequence[pivot]=["talk", self.id_perso, id_position]
                 if nsequence.childNodes[i].nodeName == "jump":
                     njump= nsequence.childNodes[i]
                     self.id_perso = njump.attributes.get("personnage_id").value
                     self.sequence[pivot]=["jump", self.id_perso]
+                if nsequence.childNodes[i].nodeName == "fight":
+                    nfight= nsequence.childNodes[i]
+                    id_perso = nfight.attributes.get("personnage_id").value
+                    place = nfight.attributes.get("place").value
+                    for i in range(len(nfight.childNodes)):
+                        if nfight.childNodes[i].nodeType == 1:
+                            if nfight.childNodes[i].nodeName == "ennemies":
+                                node_ennemies = nfight.childNodes[i]
+                                self.parse_list_ennemies(node_ennemies)
+                    self.sequence[pivot]=["fight", id_perso, self.list_ennemies, place ]
 
     def check_move(self,map,target_x,target_y):
         if map.rect.left == target_x and map.rect.top == target_y:
@@ -162,7 +210,7 @@ class Demo:
                     screen.fill((0,0,0))
                     cursor.update()
                     MapTest.update(screen, mouvement, False, False, False)
-                    MapTest.MobsUpdate(screen, mouvement , time, False, False, demo=True,perso_demo=list)
+                    MapTest.MobsUpdate(screen, mouvement , time, False, False,stop=True, demo=True,perso_demo=list)
                     MapTest.TransUpdate(screen, mouvement, time, False, False)
                     hubo_colision = pygame.sprite.spritecollideany(MapTest.mobs[i], MapTest.colisionesGroup)
                     MapTest.mobs[i].update_demo(screen,time,mouvement,MapTest,target_x,target_y)
@@ -196,10 +244,17 @@ class Demo:
                     pygame.display.update()
             elif action[0] == "talk":
                 i = self.get_id_mob(action[1],MapTest)
-                self.action.Talk(MapTest.mobs[i],time)
+                self.action.Talk(MapTest.mobs[i],time, int(action[2]))
             elif action[0] == "jump":
                 i = self.get_id_mob(action[1],MapTest)
                 self.action.jump(MapTest,screen, mouvement , time,stop=True, demo=True,perso=MapTest.mobs[i])
+            elif action[0] == "fight":
+                list = []
+                i = self.get_id_mob(action[1],MapTest)
+                jugador1 = Personaje(MapTest.mobs[i].get_name(),velocidad,WIDTH,HEIGHT,MapTest.mobs[i].image_path, "Graphics/battle\party/felix/Felix_Axe_Back.gif", "Graphics/battle\party/felix/Felix_Axe_Back.gif")
+                list.append(jugador1)
+                fight = Fight(screen, list,action[2], None, action[3])
+                fight.draw_main()
             self.sequence.pop(self.pivot)
             self.pivot =self.pivot+1
         return len(self.sequence)

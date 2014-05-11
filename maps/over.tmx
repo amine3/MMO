@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="21" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/21.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="chibihikaru-tilea2" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/chibihikaru-tilea2.png" width="512" height="384"/>
+ </tileset>
+ <tileset firstgid="449" name="suelos" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/suelos.png" width="384" height="480"/>
+ </tileset>
+ <tileset firstgid="629" name="vx-xp-174-chest01" tilewidth="32" tileheight="32">
+  <image source="../Graphics/Tilesets/vx-xp-174-chest01.png" width="96" height="192"/>
+ </tileset>
+ <layer name="over" width="50" height="50" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAODfAC7KO00QJwAA
+  </data>
+ </layer>
+ <layer name="main" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3SQQ5AQBBE0TG4/5mwxkGGNXbaKapa/qKSv63kta6UI3bGWuK+YnfsSd59LWWIjTV3qz3gClfOrfaAK1w5t9oDrnDl3GoPuMKVc6s94ApXzq32gCtcObfaA65w5dxqD7jClXOrPeAKV86t9oCrf7qa4sucfEtsjW3Jt/PDavzwGj+89v14AYDM30cQJwAA
+  </data>
+ </layer>
+ <layer name="transparency" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3Rxw3CQBQGYcuEAkgFkAogFUAqgFSACR0guXzmhq+shJ4M80kj7fF/2ixTneXUoCa1qB07J1mHutSjPg1i5yQb0ojGNKFp7JxkM5rTgpa0ip2TbE0b2tKO9rFzPvLM3+8DHelEZ7rETEpSVu4o6Eo3utMjZtLXVP+szsofuUOSJEmSJEmSJEmS9J9egestaBAnAAA=
+  </data>
+ </layer>
+ <layer name="colisiones" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3YMQoAIAwEQf1/5Y/F1lYCR5yBdCmybdYcLaxPO87+PQl06KigQ0eFlDte6ciiI4uOLF06AAAAAIB6Xf6JOrLoyKIjS5eODZUJqyoQJwAA
+  </data>
+ </layer>
+ <objectgroup name="objet" width="50" height="50">
+  <object name="heroe" x="263" y="172" width="62" height="45"/>
+ </objectgroup>
+</map>

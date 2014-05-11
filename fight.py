@@ -15,13 +15,17 @@ class Fight:
     # compteur pour associer le personnge l action et le tour
     
     
-    def __init__(self, screen,list_player, boss, chapitre):
+    def __init__(self, screen,list_player, boss, chapitre,place=None):
         
         self.list_player=[]
-        self.place=chapitre.get_scene_path()
+        self.place=place
+        if chapitre:
+            self.place=chapitre.get_scene_path()
         self.jugador = list_player
         self.list_ennemi = []
-        self.list_monsters = chapitre.get_list_ennemies()
+        self.list_monsters = {}
+        if chapitre:
+            self.list_monsters = chapitre.get_list_ennemies()
         self.list_action=[]
         self.sound=""
         self.screen = screen
@@ -66,8 +70,10 @@ class Fight:
             i+=1
         
     def get_monstre(self):
-        if self.boss == True:
+        if self.boss:
             num=1
+            number_monsters = 1
+            self.list_monsters=self.boss
         else:
             number_monsters = len(self.list_monsters)
             num = funciones.random_number(1, 4)
@@ -283,7 +289,7 @@ class Fight:
             bag_image_desc_bar = Image('graphics/bar1.png')
             bag_image_desc_bar.change_size(0.7*bag_image_desc_bar.rect.w, bag_image_desc_bar.rect.h*2)
             bag_image_desc_bar.rect.left = position
-            text_info_name = Text(text=str(player.get_name()), left=bag_image_desc_bar.rect.left+20, top = bag_image_desc_bar.rect.top+10) 
+            text_info_name = Text(text=player.get_name(), left=bag_image_desc_bar.rect.left+20, top = bag_image_desc_bar.rect.top+10)
             text_info_hp = Text(text="HP: "+str(player.get_hp()), left=bag_image_desc_bar.rect.left+20, top = bag_image_desc_bar.rect.top+30)
             text_info_sp = Text(text="SP: "+str(player.get_sp()), left=bag_image_desc_bar.rect.left+20, top = bag_image_desc_bar.rect.top+50)
             self.BagWindow_desc.appendBGImage(bag_image_desc_bar)
